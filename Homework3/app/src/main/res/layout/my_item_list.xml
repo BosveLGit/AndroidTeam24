@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="200dp"
-    android:paddingStart="200dp"
-    android:paddingEnd="200dp"
-    android:textSize="60sp" />
+    android:paddingStart="80dp"
+    android:paddingEnd="80dp"
+    android:textSize="32sp" />
