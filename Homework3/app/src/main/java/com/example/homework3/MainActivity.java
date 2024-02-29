@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         // какой дурак (разработчик платформы) придумал назвать xml test_list_item?
         // Неужели других названий не удалось придумать?
 
+
         MainListView.setAdapter(adapter);
 
     }
