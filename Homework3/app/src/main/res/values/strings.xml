@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Homework3</string>
+
+    <string-array name="counties">
+        <item>Молдова</item>
+        <item>Украина</item>
+        <item>Польша</item>
+        <item>Чехия</item>
+        <item>Италия</item>
+        <item>Румыния</item>
+        <item>Греция</item>
+        <item>Турция</item>
+        <item>Испания</item>
+        <item>Германия</item>
+    </string-array>
+
 </resources>
