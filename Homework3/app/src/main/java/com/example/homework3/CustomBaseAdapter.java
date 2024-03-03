@@ -8,23 +8,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class CustomBaseAdapter extends BaseAdapter {
 
     Context context;
-    String[] arrayCountries;
-    int[] arrayFlags;
+    List<Country> listCountry;
     LayoutInflater inflater;
 
-    public CustomBaseAdapter(Context context, String[] arrayCountries, int[] arrayFlags) {
+    public CustomBaseAdapter(Context context, List<Country> listCountry) {
         this.context = context;
-        this.arrayCountries = arrayCountries;
-        this.arrayFlags = arrayFlags;
+        this.listCountry = listCountry;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return arrayCountries.length;
+        return listCountry.size();
     }
 
     @Override
@@ -43,8 +43,8 @@ public class CustomBaseAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.country_item_list, null);
         TextView textView = (TextView) convertView.findViewById(R.id.textView);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.flagIcon);
-        textView.setText(arrayCountries[position]);
-        imageView.setImageResource(arrayFlags[position]);
+        textView.setText(listCountry.get(position).getCountry());
+        imageView.setImageResource(listCountry.get(position).getIconFlag());
 
         return convertView;
     }
