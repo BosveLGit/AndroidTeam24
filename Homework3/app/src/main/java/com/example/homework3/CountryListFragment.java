@@ -1,9 +1,11 @@
 package com.example.homework3;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,40 +23,37 @@ import java.util.List;
  */
 public class CountryListFragment extends Fragment {
 
+    private OnFragmentSendDataListener fragmentSendDataListener;
     List<Country> listCountry = new ArrayList<>();
-
-
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
 
     public CountryListFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
+    interface OnFragmentSendDataListener {
+        void onSendData(Country country);
+    }
+
     public static CountryListFragment newInstance(String param1, String param2) {
         CountryListFragment fragment = new CountryListFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            fragmentSendDataListener = (OnFragmentSendDataListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " должен реализовывать интерфейс OnFragmentInteractionListener");
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
 
         listCountry.add(new Country("Бельгия", R.drawable.be, "Брюссель", 30688));
         listCountry.add(new Country("Канада", R.drawable.ca, "Оттава", 9985000));
@@ -66,9 +65,6 @@ public class CountryListFragment extends Fragment {
         listCountry.add(new Country("Венгрия", R.drawable.hu, "Будапешт", 93026));
         listCountry.add(new Country("Ирландия", R.drawable.ie, "Дублин", 70273));
         listCountry.add(new Country("Япония", R.drawable.jp, "Токио", 377973));
-
-
-
 
     }
 
@@ -84,9 +80,13 @@ public class CountryListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), Card_country.class);
-                intent.putExtra(Country.class.getSimpleName(), listCountry.get(position));
-                startActivity(intent);
+
+                FragmentContainerView fragmentContainerView = getActivity().findViewById(R.id.detailFragment);
+                fragmentContainerView.setVisibility(View.VISIBLE);
+
+                Country selectedItem = (Country) parent.getItemAtPosition(position);
+                fragmentSendDataListener.onSendData(selectedItem);
+
             }
         });
 

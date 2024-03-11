@@ -13,15 +13,24 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements CountryListFragment.OnFragmentSendDataListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CountryListFragment countryListFragment = new CountryListFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container_view, countryListFragment).commit();
+//        CountryListFragment countryListFragment = new CountryListFragment();
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.fragment_container_view, countryListFragment).commit();
+    }
+
+
+    @Override
+    public void onSendData(Country country) {
+        DetailFragment fragment = (DetailFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.detailFragment);
+        if (fragment != null)
+            fragment.setSelectedItem(country);
     }
 }
