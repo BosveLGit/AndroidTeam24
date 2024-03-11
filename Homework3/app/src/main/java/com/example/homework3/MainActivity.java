@@ -15,10 +15,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Country> listCountry = new ArrayList<>();
-
-    ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
